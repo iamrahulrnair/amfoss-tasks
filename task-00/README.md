@@ -3,7 +3,7 @@ I have been using **ubuntu** for past couple of months now, my experience with *
 **Things needed**
  - [ ] ubuntu ISO file
  - [ ] any bootable device to mount the ISO file, (i used rufus to create my usb as bootable drive)
- - [ ]  patience 🥲
+ - [ ]  patience 😅
 
 **Steps**
  - [ ] burn the iso to the device (make sure to format it)
