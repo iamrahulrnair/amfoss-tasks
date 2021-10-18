@@ -15,7 +15,7 @@ my_parser.add_argument('id',
 args = my_parser.parse_args()
 data = args.data.split(",")
 _id = args.id
-api_key="6PTcQFYfO9yjXaUzWyrgeYvr9paVMqLEKRvH0qMD"
+api_key="6PTcQFYfO9yjXaUzwyrgeYvr9paVMqLEKRvH0qMD"
 final_data="&".join(data)
 
 payload={
