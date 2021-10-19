@@ -1,4 +1,4 @@
-# fluuter_task
+# fluter_task
 
 A new **Flutter** project, which shows how taBarview works with along with navigation
 
