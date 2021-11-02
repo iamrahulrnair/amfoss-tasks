@@ -1,39 +1,61 @@
 package main
 
 import (
+	"context"
 	"encoding/csv"
 	"fmt"
+	"log"
 	"os"
-
-	"github.com/gocolly/colly"
+	"strconv"
+	// "time"
+	"github.com/chromedp/cdproto/emulation"
+	"github.com/chromedp/chromedp"
 )
-
 func checkError(err error){
 	if err!=nil{
 		panic(err)
 	}
 }
-func main(){
-	fName:="data.csv"
+
+func main() {
+	// create chrome instance
+	ctx, cancel := chromedp.NewContext(
+		context.Background(),
+		chromedp.WithLogf(log.Printf),
+	)
+	defer cancel()
+
+	// create a timeout
+	// start := time.Now()
+	// navigate to a page, wait for an element, click
+	var name string;
+	var net_worth string;
+	var age string;
+	var country string;
+	var source string;
+	fName:= "data.csv";
 	file,err:=os.Create(fName)
 	checkError(err)
 	defer file.Close()
+	for i := 1; i < 11; i++ {
+		err := chromedp.Run(ctx,
+			emulation.SetUserAgentOverride("WebScraper 1.0"),
+			chromedp.Navigate(`https://www.forbes.com/real-time-billionaires/`),
+			chromedp.ScrollIntoView(`body`),
+			chromedp.WaitVisible(`#row-4 > div.table-parent.ng-scope.ng-isolate-scope > div > div.fbs-table > div.scrolly-table > table > tbody`),
+			chromedp.TextContent(fmt.Sprintf(`#row-4 > div.table-parent.ng-scope.ng-isolate-scope > div > div.fbs-table > div.scrolly-table > table > tbody > tr:nth-child(%s) > td.name > div > h3 > a`,strconv.Itoa(i)), &name,chromedp.ByQueryAll),
+			chromedp.TextContent(fmt.Sprintf(`#row-4 > div.table-parent.ng-scope.ng-isolate-scope > div > div.fbs-table > div.scrolly-table > table > tbody > tr:nth-child(%s) > td.Net.Worth > div > span`,strconv.Itoa(i)), &net_worth,chromedp.ByQueryAll),
+			chromedp.TextContent(fmt.Sprintf(`#row-4 > div.table-parent.ng-scope.ng-isolate-scope > div > div.fbs-table > div.scrolly-table > table > tbody > tr:nth-child(%s) > td.age > div > span`,strconv.Itoa(i)), &age,chromedp.ByQueryAll),
+			chromedp.TextContent(fmt.Sprintf(`#row-4 > div.table-parent.ng-scope.ng-isolate-scope > div > div.fbs-table > div.scrolly-table > table > tbody > tr:nth-child(%s) > td.source > div > span`,strconv.Itoa(i)), &source,chromedp.ByQueryAll),
+			chromedp.TextContent(fmt.Sprintf(`#row-4 > div.table-parent.ng-scope.ng-isolate-scope > div > div.fbs-table > div.scrolly-table > table > tbody > tr:nth-child(%s) > td.Country\/Territory > div > span`,strconv.Itoa(i)), &country,chromedp.ByQueryAll),
+		)
+		checkError(err)
 	writer:=csv.NewWriter(file)
-	defer writer.Flush()
-	c:=colly.NewCollector(colly.AllowedDomains("forbes.com","www.forbes.com"),colly.UserAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"))
-	c.OnHTML(".scrolly-table tbody tr", func(e *colly.HTMLElement) {
-			writer.Write([]string{
-				e.ChildText(".rank .ng-binding"),
-			})
-		})	
-		c.OnError(func(_ *colly.Response, err error) {
-			fmt.Println("Something went wrong:", err)
-		})
-		c.OnRequest(func(r *colly.Request) {
-			fmt.Println("Visiting", r.URL)
-		})
-		c.OnResponse(func(r *colly.Response) {
-			fmt.Println("Visited", string(r.Body))
-		})
-		c.Visit("https://www.forbes.com/real-time-billionaires/#131241903d78")
+		writer.Write([]string{
+			name,net_worth,age,country,source,
+			})	
+		// 	fmt.Printf(name,net_worth,age,country,source,)
+		// fmt.Printf("\nTook: %f secs\n", time.Since(start).Seconds())
+		writer.Flush()	
+	}
 }
