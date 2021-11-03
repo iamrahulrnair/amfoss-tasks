@@ -1,6 +1,0 @@
-This favicon was generated using the following font:
-
-- Font Title: Petrona
-- Font Author: Copyright 2019 The Petrona Project Authors (https://github.com/RingoSeeber/Petrona)
-- Font Source: http://fonts.gstatic.com/s/petrona/v16/mtGl4_NXL7bZo9XXq35wRLONYyOjFk6NsQRBH452Mvds.ttf
-- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))

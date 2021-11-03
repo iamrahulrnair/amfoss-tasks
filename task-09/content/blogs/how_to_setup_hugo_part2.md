@@ -1,7 +1,7 @@
 ---
 title: 'How_to_setup_hugo_part2'
 date: 2021-11-03T10:54:27+05:30
-draft: true
+draft: false
 author: 'Rahul R'
 tags: ['hugo', 'themes']
 ---

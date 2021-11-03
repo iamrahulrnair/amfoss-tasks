@@ -1,7 +1,7 @@
 ---
 title: 'How_to_setup_hugo_part1'
 date: 2021-11-02T20:34:32+05:30
-draft: true
+draft: false
 author: 'Rahul R'
 iamrahulrnair: 'https://github.com/iamrahulrnair'
 tags: ['hugo', 'themes']
