@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  line-height: 1.6;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: $dark-color;
+  color: $light-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $lightest-color;
+}
+a {
+  color: $primary-color;
+  transition: color 0.35s;
+  text-decoration: none;
+
+  &:hover {
+    color: $lightest-color;
+  }
+}
+
+// Browsers seem to use a smaller default font-size with monospaced code
+// blocks (like 80% of the size of normal text) and that looks pretty bad with
+// small inline code-blocks in the middle of normal text (mainly because of
+// the very noticeable difference in x-height). This CSS corrects that problem.
+code {
+  font-family: monospace, monospace;
+  font-size: 1em;
+  color: rgba($light-color, 0.8);
+}
+
+pre {
+  font-size: 1rem;
+  line-height: 1.2em;
+  margin: 0;
+  overflow: auto;
+
+  // A larger monospaced block of text (that isn't mixed with normal text)
+  // generally looks heavier than normal text with the same font size. For this
+  // reason using a smaller monospaced font size makes sense in this situation.
+  code {
+    font-size: 0.8em;
+  }
+}
+
+::selection {
+  background: rgba($light-color, 0.25);
+}
+::-moz-selection {
+  background: rgba($light-color, 0.25);
+}
+.social-links {
+  background-color: rgba(255, 255, 255, 0.529);
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  transition: 2s background-color;
+  &:hover {
+    background-color: $primary-color;
+    transition: 0.5s all;
+  }
+}
+.social-links > a {
+  height: 100%;
+  padding: 2px;
+  transition: 0.5s all;
+  &:hover {
+    transform: translateY(-2px);
+    transition: 0.5s all;
+  }
+}
+.social-links > a:active {
+  transform: translateY(2px);
+  transition: 0.5s all;
+}
+.bio_def {
+  line-height: 5px;
+  & p {
+    color: $lightest-color;
+  }
+  & > a {
+    padding: 5px;
+    line-height: 1.5rem;
+  }
+}

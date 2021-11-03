@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default "en-us" }}">
+  <head>
+    <title>Rahul's portfolio</title>
+    <link rel="shortcut icon" href="{{.Site.Params.favicon_url}}favicon-16x16.png" />
+    <link rel="icon" href="{{.Site.Params.favicon_url}}favicon.ico" />
+
+    <meta charset="utf-8" />
+    {{ hugo.Generator }}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="{{ .Site.Params.author | default "John Doe" }}" />
+    <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
+    {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint -}}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" />
+
+    {{ template "_internal/google_analytics.html" . }}
+    {{ template "_internal/twitter_cards.html" . }}
+    {{ template "_internal/opengraph.html" . }}
+
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="social-links">
+       <a href=""><img src="https://img.icons8.com/material-outlined/50/000000/github.png"/></a>
+       <a href=""><img src="https://img.icons8.com/ios-glyphs/60/000000/linkedin.png"/></a>
+       <a href=""><img src="https://img.icons8.com/ios-glyphs/60/000000/facebook-new.png"/></a>
+       <a href=""><img src="https://img.icons8.com/color/48/000000/medium-logo--v2.png"/></a>
+      </div> 
+      <a class="profile_image" href="{{ .Site.BaseURL }}"><img class="app-header-avatar" src="https://avatars.githubusercontent.com/u/55950758?s=400&u=e73fcd52ff1a1a5bd5b185c6e9162e24c772dc4b&v=4" alt="{{ .Site.Params.author | default "John Doe" }}" /></a>
+      <div class="bio_def">
+        <h1 class="name_heading">Rahul R</h1>
+        <p>MCA 2021</p>
+        <a href="/about">About🖖</a>
+        <a href="/projects">Projects👌</a>
+        <a href="/blogs">Blogs👋</a>
+        {{ if ne .URL "/" }}
+        <a href="/">Home 🤟 </a>
+        {{ end }}
+      </div>
+      {{- with .Site.Menus.main }}
+      <nav class="app-header-menu">
+        {{- range $key, $item := . }}
+          {{- if ne $key 0 }}
+            {{ $.Site.Params.menu_item_separator | default " - " | safeHTML }}
+          {{ end }}
+          <a class="app-header-menu-item" href="{{ $item.URL }}">{{ $item.Name }}</a>
+        {{- end }}
+      </nav>
+      {{- end }}
+      <p>{{ .Site.Params.bio_desc | default "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium." }}</p>
+      {{- with .Site.Params.social }}
+      <div class="app-header-social">
+        {{ range . }}
+          <a href="{{ .url }}" target="_blank" rel="noreferrer noopener">
+            {{ partial "icon.html" (dict "ctx" $ "name" .icon "title" .name) }}
+          </a>
+        {{ end }}
+      </div>
+      {{- end }}
+    </header>
+    <main class="app-container">
+      {{ block "main" . }}
+        {{ .Content }}
+      {{ end }}
+    </main>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+  </body>
+</html>

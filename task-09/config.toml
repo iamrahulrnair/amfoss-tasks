@@ -1,0 +1,8 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Personal Website | built on HUGO"
+theme="hugo-theme-m10c"
+[params]
+  bio_desc = "A static site designed by me, but built on Hugo ❤️"
+  favicon_url = "/icon/"
+  author = "iamrahulrnair"

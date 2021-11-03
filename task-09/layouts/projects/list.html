@@ -1,0 +1,39 @@
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  <span style="color: rgba(136, 135, 135, 0.782); font-size: small"
+    >Some basic projects that i have worked on:</span
+  >
+  <div class="container-cards">
+    <div
+      class="github-card"
+      data-github="iamrahulrnair/easy-markdown"
+      data-width="400"
+      data-height=""
+      data-theme="default"
+    ></div>
+    <div
+      class="github-card"
+      data-github="iamrahulrnair/blockchain-demo"
+      data-width="400"
+      data-height=""
+      data-theme="default"
+    ></div>
+    <div
+      class="github-card"
+      data-github="iamrahulrnair/template-loader"
+      data-width="400"
+      data-height=""
+      data-theme="default"
+    ></div>
+    <div
+      class="github-card"
+      data-github="iamrahulrnair/TODO-logger"
+      data-width="400"
+      data-height=""
+      data-theme="default"
+    ></div>
+  </div>
+  {{ partial "pagination.html" $ }}
+</article>
+{{ end }}
